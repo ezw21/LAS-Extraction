@@ -1,13 +1,13 @@
-# Extract building footprint from LAS. Update Line[150:] to run
+# Extract building footprint from LAS.
 # Author:      Edward Wong
-# Created:     23/02/202
+# Created:     23/02/2022
 import arcpy
 import time
 import math
 import datetime
 
 
-def LAS_Extraction(myWorkspace, filePath, zone, noise):  # Model
+def LAS_Footprints_Extraction(myWorkspace, filePath, zone, noise):  # Model
     start = time.time()
     print(datetime.datetime.now())
     print("Extracting 3D building and footprint..\n")
@@ -153,4 +153,4 @@ if __name__ == '__main__':
     myWorkspace = r"C:\Users\exw\Documents\ArcGIS\Projects\PROJECT\PROJECT.gdb"
     myFilePath = r"C:\PHYSICAL_PATH\LAS_File.las"
     with arcpy.EnvManager(scratchWorkspace=myWorkspace, workspace=myWorkspace):
-        LAS_Extraction(myWorkspace, myFilePath, "LAS_FILE", False)
+        LAS_Footprints_Extraction(myWorkspace, myFilePath, "LAS_FILE", False)
