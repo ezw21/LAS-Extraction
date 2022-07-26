@@ -153,4 +153,4 @@ if __name__ == '__main__':
     myWorkspace = r"C:\Users\exw\Documents\ArcGIS\Projects\PROJECT\PROJECT.gdb"
     myFilePath = r"C:\PHYSICAL_PATH\LAS_File.las"
     with arcpy.EnvManager(scratchWorkspace=myWorkspace, workspace=myWorkspace):
-        LAS_Footprints_Extraction(myWorkspace, myFilePath, "LAS_FILE", False)
+        LAS_Footprints_Extraction(myWorkspace, myFilePath, "LAS_FILE", True, , 0.25)
