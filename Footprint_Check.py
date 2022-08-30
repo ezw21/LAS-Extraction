@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 # np.set_printoptions(threshold=np.inf)
 
-before = cv2.imread("Footprints/3D Basemap_2D_EDW.jpg")
-after = cv2.imread("Footprints/3D Basemap_2D_RAST.jpg")
+before = cv2.imread("Footprints/Footprints0.jpg")
+after = cv2.imread("Footprints/Footprints1.jpg")
 
 """ 
 image_size will store image.shape 
@@ -58,29 +58,29 @@ index = 1
 
 for c in contours:
     area = cv2.contourArea(c)
-    if area > 300:
+    if area > 50:
 
         x, y, w, h = cv2.boundingRect(c)
         bouding_boxes.append((x, y, w, h))
-        cv2.rectangle(before, (x, y), (x + w, y + h), (36, 255, 12), 1)
+        cv2.rectangle(before, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv2.putText(
             before,
             "point" + str(index),
             (x, y - 10),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.5,
-            (255, 0, 0),
+            (0, 0, 255),
             2,
         )  # labels
-        cv2.rectangle(after, (x, y), (x + w, y + h), (36, 255, 12), 1)
+        cv2.rectangle(after, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.putText(
             after,
             "point" + str(index),
             (x, y - 10),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.5,
-            (36, 255, 12),
-            1,
+            (0, 0, 255),
+            2,
         )  # labels
         cv2.drawContours(mask1, [c], 0, (0, 255, 0), -1)
         cv2.drawContours(filled_after, [c], 0, (0, 255, 0), -1)
@@ -95,6 +95,7 @@ cv2.imshow("mask1", mask1)
 cv2.imshow("filled after", filled_after)
 cv2.imshow("after with grid", after_with_grid)
 cv2.waitKey(0)
+
 
 """
  Impact assessment part / pseudo ignore

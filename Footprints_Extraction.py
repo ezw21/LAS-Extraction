@@ -19,7 +19,7 @@ def LAS_Footprints_Extraction(myWorkspace, filePath, zone, noise):  # Model
     arcpy.CheckOutExtension("3D")
 
     _zone_las = f"{zone}.las"
-    Dem_tin_tif = arcpy.Raster(f"{zone}.tin.tif")
+    # Dem_tin_tif = arcpy.Raster(f"{zone}.tin.tif")
     workspace = f"{myWorkspace}\{zone}_"
     desc = arcpy.Describe(f"{filePath}")
 
@@ -47,32 +47,32 @@ def LAS_Footprints_Extraction(myWorkspace, filePath, zone, noise):  # Model
                   statistics))
     print("\nSTART")
 
-    if (noise):
-        print(datetime.datetime.now())
-        _zone_Noise = f"{workspace}Noise"
-        arcpy.ddd.ClassifyLasNoise(_zone_las, method='ISOLATION', edit_las='CLASSIFY',
-                                   withheld='NO_WITHHELD', ground=Dem_tin_tif,
-                                   compute_stats='COMPUTE_STATS',
-                                   low_z='2 Meters', high_z='',
-                                   max_neighbors=10, step_width='8 Meters',
-                                   step_height='8 Meters', out_feature_class=_zone_Noise,
-                                   update_pyramid='UPDATE_PYRAMID')
-        print("Classified LAS Noise")
+#     if (noise):
+#         print(datetime.datetime.now())
+#         _zone_Noise = f"{workspace}Noise"
+#         arcpy.ddd.ClassifyLasNoise(_zone_las, method='ISOLATION', edit_las='CLASSIFY',
+#                                    withheld='NO_WITHHELD', ground=Dem_tin_tif,
+#                                    compute_stats='COMPUTE_STATS',
+#                                    low_z='2 Meters', high_z='',
+#                                    max_neighbors=10, step_width='8 Meters',
+#                                    step_height='8 Meters', out_feature_class=_zone_Noise,
+#                                    update_pyramid='UPDATE_PYRAMID')
+#         print("Classified LAS Noise")
 
-        # Classify overlap points
-        arcpy.ddd.ClassifyLasOverlap(
-            _zone_las, "0.624 Meters", "DEFAULT", "PROCESS_EXTENT", "COMPUTE_STATS", "UPDATE_PYRAMID")
-        print("Classified overlap points")
+#         # Classify overlap points
+#         arcpy.ddd.ClassifyLasOverlap(
+#             _zone_las, "0.624 Meters", "DEFAULT", "PROCESS_EXTENT", "COMPUTE_STATS", "UPDATE_PYRAMID")
+#         print("Classified overlap points")
 
-#     arcpy.ddd.ChangeLasClassCodes(_zone_las, "0 2 SET SET SET SET;1 2 SET SET SET SET;3 2 SET SET SET SET;4 2 SET SET SET SET;5 2 SET SET SET SET;7 2 SET SET SET SET;18 2 SET SET SET SET;",
-#                                   "COMPUTE_STATS", "DEFAULT", None,
-#                                   "PROCESS_EXTENT", "UPDATE_PYRAMID")
-#     print("Changed LAS ClassCode")
+# #     arcpy.ddd.ChangeLasClassCodes(_zone_las, "0 2 SET SET SET SET;1 2 SET SET SET SET;3 2 SET SET SET SET;4 2 SET SET SET SET;5 2 SET SET SET SET;7 2 SET SET SET SET;18 2 SET SET SET SET;",
+# #                                   "COMPUTE_STATS", "DEFAULT", None,
+# #                                   "PROCESS_EXTENT", "UPDATE_PYRAMID")
+# #     print("Changed LAS ClassCode")
 
-    print(datetime.datetime.now())
-    # Filter LAS to Class_6
-    arcpy.management.MakeLasDatasetLayer(
-        _zone_las, _zone_las, class_code=[6])
+#     print(datetime.datetime.now())
+#     # Filter LAS to Class_6
+#     arcpy.management.MakeLasDatasetLayer(
+#         _zone_las, _zone_las, class_code=[6])
 
     # Process: LAS Point Statistics As Raster (LAS Point Statistics As Raster) (management)
     _zone_Raster = f"{workspace}Raster"
@@ -133,10 +133,10 @@ def LAS_Footprints_Extraction(myWorkspace, filePath, zone, noise):  # Model
                                           precision=0.15, diagonal_penalty=1.5, min_radius=0.1, max_radius=1000000, alignment_feature="", alignment_tolerance="", tolerance_type="DISTANCE")
 
     print(datetime.datetime.now())
-    # Process: LAS Building Multipatch (LAS Building Multipatch) (3d)
-    _zone_3D = (workspace + "3D")
-    arcpy.ddd.LasBuildingMultipatch(in_las_dataset=_zone_las, in_features=_zone_Footprints, ground=Dem_tin_tif,
-                                    out_feature_class=_zone_3D, point_selection="BUILDING_CLASSIFIED_POINTS", simplification="0.1 Meters")
+    # # Process: LAS Building Multipatch (LAS Building Multipatch) (3d)
+    # _zone_3D = (workspace + "3D")
+    # arcpy.ddd.LasBuildingMultipatch(in_las_dataset=_zone_las, in_features=_zone_Footprints, ground=Dem_tin_tif,
+    #                                 out_feature_class=_zone_3D, point_selection="BUILDING_CLASSIFIED_POINTS", simplification="0.1 Meters")
 
 # Display total time consumption
     minute = 0
@@ -150,7 +150,7 @@ def LAS_Footprints_Extraction(myWorkspace, filePath, zone, noise):  # Model
 
 if __name__ == '__main__':
     # Global Environment settings
-    myWorkspace = r"C:\Users\exw\Documents\ArcGIS\Projects\PROJECT\PROJECT.gdb"
-    myFilePath = r"C:\PHYSICAL_PATH\LAS_File.las"
+    myWorkspace = r"C:\Users\exw\Documents\ArcGIS\NZEUC_Demo\NZEUC_Demo\NZEUC_Demo.gdb"
+    myFilePath = r"C:\Users\exw\Desktop\Edward\Demo\Church.las"
     with arcpy.EnvManager(scratchWorkspace=myWorkspace, workspace=myWorkspace):
-        LAS_Footprints_Extraction(myWorkspace, myFilePath, "LAS_FILE", True, , 0.25)
+        LAS_Footprints_Extraction(myWorkspace, myFilePath, "Church", True)
