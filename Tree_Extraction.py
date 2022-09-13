@@ -115,14 +115,6 @@ def LAS_Trees_Extraction(myWorkspace, filePath, zone, noise):  # Model
     # Output the result
     arcpy.conversion.FeatureClassToFeatureClass(_zone_TreeEvents, f"{myWorkspace}", _zone_TreesPoint, '', 'Z_Min "Z_Min" true true false 8 Double 0 0,First,#,Trees_Event,Z_Min,-1,-1;Z_Max "Z_Max" true true false 8 Double 0 0,First,#,Trees_Event,Z_Max,-1,-1;Z_Mean "Z_Mean" true true false 8 Double 0 0,First,#,Trees_Event,Z_Mean,-1,-1;Length3D "Length3D" true true false 8 Double 0 0,First,#,Trees_Event,Length3D,-1,-1;Min_Slope "Min_Slope" true true false 8 Double 0 0,First,#,Trees_Event,Min_Slope,-1,-1;Max_Slope "Max_Slope" true true false 8 Double 0 0,First,#,Trees_Event,Max_Slope,-1,-1;Avg_Slope "Avg_Slope" true true false 8 Double 0 0,First,#,Trees_Event,Avg_Slope,-1,-1;Vertex_Cnt "Vertex_Cnt" true true false 4 Long 0 0,First,#,Trees_Event,Vertex_Cnt,-1,-1;Shape_Length "Shape_Length" false true true 8 Double 0 0,First,#,Trees_Event,Shape_Length,-1,-1;Shape_Area "Shape_Area" false true true 8 Double 0 0,First,#,Trees_Event,Shape_Area,-1,-1;INSIDE_X "INSIDE_X" true true false 8 Double 0 0,First,#,Trees_Event,INSIDE_X,-1,-1;INSIDE_Y "INSIDE_Y" true true false 8 Double 0 0,First,#,Trees_Event,INSIDE_Y,-1,-1;INSIDE_Z "INSIDE_Z" true true false 8 Double 0 0,First,#,Trees_Event,INSIDE_Z,-1,-1;Z "Z" true true false 8 Double 0 0,First,#,Trees_Event,Z,-1,-1;Height "Height" true true false 4 Float 0 0,First,#,Trees_Event,Height,-1,-1', '')
 
-# TODO refactor into OOP approach
-# class Tree:
-#   def __init__(self, name, age):
-#     self.worspace = workspace
-#     self.zone = zone
-
-# p1 = Tree("mypath", "mc2.las")
-
 
 # Display total time consumption
     minute = 0
@@ -137,6 +129,6 @@ def LAS_Trees_Extraction(myWorkspace, filePath, zone, noise):  # Model
 if __name__ == '__main__':
     # Global Environment settings
     myWorkspace = r"C:\Users\exw\Documents\ArcGIS\Projects\Tree_Module_Code2\Tree_Module_Code2.gdb"
-    myFilePath = r"C:\Users\exw\Desktop\Edward\GALoP-X\WGTN"
+    myFilePath = r"C:\Users\exw\Desktop\NZEUC2022\TePaeLAS"
     with arcpy.EnvManager(scratchWorkspace=myWorkspace, workspace=myWorkspace):
-        LAS_Trees_Extraction(myWorkspace, myFilePath, "MC2", False)
+        LAS_Trees_Extraction(myWorkspace, myFilePath, "tepae", False)
